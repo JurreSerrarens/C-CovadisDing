@@ -1,0 +1,6 @@
+@corvadis.API_HostAddress = http://localhost:5121
+
+GET {{corvadis.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
