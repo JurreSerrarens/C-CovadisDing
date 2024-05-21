@@ -1,4 +1,7 @@
 
+using corvadis.API.Context;
+using Microsoft.EntityFrameworkCore;
+
 namespace corvadis.API
 {
     public class Program
@@ -6,6 +9,13 @@ namespace corvadis.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var services = builder.Services;
+
+            // Add database context
+            services.AddDbContext<GraafschapCollegeDbContext>(options =>
+            {
+                options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
 
             // Add services to the container.
 
