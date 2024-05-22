@@ -1,4 +1,4 @@
-using corvadis.API.models;
+using Covadis.API.Models;
 using Covadis.Shared;
 using Microsoft.AspNetCore.Mvc;
 
