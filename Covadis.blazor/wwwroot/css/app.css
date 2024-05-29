@@ -100,7 +100,7 @@ a, .btn-link {
         content: var(--blazor-load-percentage-text, "Loading");
     }
 
-.login {
+.login .home{
     display: flex;
     align-items: center;
     justify-content: center;
