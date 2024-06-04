@@ -27,6 +27,13 @@ namespace Covadis.API.Controllers
 
             return Ok(carDtos);
         }
+        [HttpGet]
+        public IActionResult GetById(int id)
+        {
+            var carDtos = context.Cars.FirstOrDefault(x => x.Id == id);
+
+            return Ok(carDtos);
+        }
 
         [HttpPost]
         public IActionResult Post([FromBody] Car car)

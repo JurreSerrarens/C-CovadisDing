@@ -24,6 +24,13 @@ namespace Covadis.API.Controllers
 
             return Ok(userDtos);
         }
+        [HttpGet]
+        public IActionResult GetById(int id)
+        {
+            var userDtos = context.Users.FirstOrDefault(x => x.Id == id);
+
+            return Ok(userDtos);
+        }
 
         [HttpPost]
         public IActionResult Post([FromBody] User user)

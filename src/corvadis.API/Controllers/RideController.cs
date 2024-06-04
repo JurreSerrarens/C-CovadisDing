@@ -27,6 +27,13 @@ namespace Covadis.API.Controllers
 
             return Ok(rideDtos);
         }
+        [HttpGet]
+        public IActionResult GetById(int id)
+        {
+            var rideDtos = context.Rides.FirstOrDefault(x  => x.Id == id);
+
+            return Ok(rideDtos);
+        }
 
         [HttpPost]
         public IActionResult Post([FromBody] Ride ride)

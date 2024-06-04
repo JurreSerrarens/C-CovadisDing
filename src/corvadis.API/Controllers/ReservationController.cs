@@ -16,7 +16,13 @@ namespace Covadis.API.Controllers
         [HttpGet]
         public IActionResult Get(int id)
         {
-            var value =  context.Reservations.FirstOrDefault(x => x.Id == id);
+            var value =  context.Reservations;
+            return Ok(value);
+        }
+        [HttpGet]
+        public IActionResult GetBy(int id)
+        {
+            var value = context.Reservations.FirstOrDefault(x => x.Id == id);
             return Ok(value);
         }
 
