@@ -1,10 +1,10 @@
-using corvadis.API.Context;
-using corvadis.API.models;
+using Covadis.API.Models;
 using Covadis.Shared;
+using Covadis.API.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace corvadis.API.Controllers
+namespace Covadis.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -15,15 +15,11 @@ namespace corvadis.API.Controllers
         {
             this.context = context;
         }
-        private static List<Car> Cars = new List<Car>
-        {
-            new Car {Name = "name", Model = "model"}
-        };
 
         [HttpGet]
         public IActionResult Get()
         {
-            var carDtos = Cars.Select(car => new CarDto
+            var carDtos = context.Cars.Select(car => new CarDto
             {
                 Name = car.Name,
                 Model = car.Model
@@ -35,7 +31,7 @@ namespace corvadis.API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Car car)
         {
-            Cars.Add(car);
+            context.Cars.Add(car);
             return Ok();
         }
 

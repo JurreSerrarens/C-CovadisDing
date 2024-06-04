@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using corvadis.API.Context;
+using Covadis.API.Context;
 
 #nullable disable
 
 namespace corvadis.API.Migrations
 {
-    [DbContext(typeof(GraafschapCollegeDbContext))]
+    [DbContext(typeof(CovadisDbContext))]
     [Migration("20240515073850_InitialCreate")]
     partial class InitialCreate
     {

@@ -1,4 +1,4 @@
-﻿namespace corvadis.API.models;
+﻿namespace Covadis.API.Models;
 
 public class User
 {

@@ -1,11 +1,11 @@
-using corvadis.API.Context;
-using corvadis.API.Models;
+using Covadis.API.Models;
 using Covadis.Shared;
+using Covadis.API.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 
-namespace corvadis.API.Controllers
+namespace Covadis.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
