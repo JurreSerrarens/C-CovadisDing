@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using corvadis.API.models;
-using corvadis.API.Models;
+using Covadis.API.Models;
 
-namespace corvadis.API.Context;
+namespace Covadis.API.Context;
 
 public class CovadisDbContext(DbContextOptions<CovadisDbContext> options)
 : DbContext(options)
@@ -13,5 +12,7 @@ public class CovadisDbContext(DbContextOptions<CovadisDbContext> options)
     public DbSet<Car> Cars { get; set; }
 
     public DbSet<Ride> Rides { get; set; }
+
+    public DbSet<Reservation> Reservations { get; set; }
 
 }

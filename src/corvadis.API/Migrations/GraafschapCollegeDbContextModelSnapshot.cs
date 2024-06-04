@@ -2,14 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using corvadis.API.Context;
+using Covadis.API.Context;
 
 #nullable disable
 
 namespace corvadis.API.Migrations
 {
-    [DbContext(typeof(GraafschapCollegeDbContext))]
-    partial class GraafschapCollegeDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(CovadisDbContext))]
+    partial class CovadisDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

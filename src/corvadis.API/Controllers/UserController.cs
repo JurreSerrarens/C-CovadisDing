@@ -1,29 +1,22 @@
-using corvadis.API.Context;
-using corvadis.API.models;
+using Covadis.API.Models;
 using Covadis.Shared;
+using Covadis.API.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace corvadis.API.Controllers
+namespace Covadis.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
         private CovadisDbContext context;
-        public UserController(CovadisDbContext context)
-        {
-            this.context = context;
-        }
-        private static List<User> Users = new List<User>
-        {
-            new User {Name = "name", Email = "email", Password = "password" }
-        };
+        public UserController(CovadisDbContext context) { this.context = context; }
 
         [HttpGet]
         public IActionResult Get()
         {
-            var userDtos = Users.Select(user => new UserDto
+            var userDtos = context.Users.Select(user => new UserDto
             {
                 Name = user.Name,
                 Email = user.Email,
@@ -35,7 +28,7 @@ namespace corvadis.API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] User user)
         {
-            Users.Add(user);
+            context.Users.Add(user);
             return Ok();
         }
 
