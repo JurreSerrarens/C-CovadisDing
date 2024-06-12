@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "corvadis.API", "src\corvadi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covadis.Shared", "GraafschapCollege.Shared\Covadis.Shared.csproj", "{DC28DBA8-A298-48AC-87B7-D261545DBC0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Covadis.blazor", "Covadis.blazor\Covadis.blazor.csproj", "{EECCC43E-F42B-4E77-9242-D626BFDE6864}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covadis.blazor", "Covadis.blazor\Covadis.blazor.csproj", "{EECCC43E-F42B-4E77-9242-D626BFDE6864}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
