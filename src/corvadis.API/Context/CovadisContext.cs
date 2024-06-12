@@ -8,7 +8,8 @@ public class CovadisDbContext(DbContextOptions<CovadisDbContext> options)
 : DbContext(options)
 {
     public DbSet<User> Users { get; set; }
-  
+    public DbSet<Role> Roles { get; set; }
+
     public DbSet<Car> Cars { get; set; }
 
     public DbSet<Ride> Rides { get; set; }

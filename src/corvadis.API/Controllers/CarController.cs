@@ -3,9 +3,11 @@ using Covadis.Shared;
 using Covadis.API.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Covadis.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CarController : ControllerBase
@@ -27,18 +29,18 @@ namespace Covadis.API.Controllers
 
             return Ok(carDtos);
         }
-        [HttpGet]
+        [HttpGet("getCar/{id}")]
         public IActionResult GetById(int id)
         {
-            var carDtos = context.Cars.FirstOrDefault(x => x.Id == id);
-
-            return Ok(carDtos);
+            var carDto = context.Cars.FirstOrDefault(x => x.Id == id);
+            return Ok(carDto);
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] Car car)
         {
             context.Cars.Add(car);
+            context.SaveChanges();
             return Ok();
         }
 
@@ -48,7 +50,6 @@ namespace Covadis.API.Controllers
             Car oldCar = context.Cars.SingleOrDefault(x => x.Id == car.Id);
             oldCar.Name = car.Name;
             oldCar.Model = car.Model;
-            //oudeBoek.AantalBladzijden = boek.AantalBladzijden;
             context.SaveChanges();
             return Ok();
         }
