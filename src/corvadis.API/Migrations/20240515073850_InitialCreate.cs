@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace corvadis.API.Migrations
+namespace Covadis.API.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

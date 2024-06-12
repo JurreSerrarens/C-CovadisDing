@@ -27,18 +27,18 @@ namespace Covadis.API.Controllers
 
             return Ok(rideDtos);
         }
-        [HttpGet]
+        [HttpGet("getRide/{id}")]
         public IActionResult GetById(int id)
         {
-            var rideDtos = context.Rides.FirstOrDefault(x  => x.Id == id);
-
-            return Ok(rideDtos);
+            var rideDto = context.Rides.FirstOrDefault(x  => x.Id == id);
+            return Ok(rideDto);
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] Ride ride)
         {
             context.Rides.Add(ride);
+            context.SaveChanges();
             return Ok();
         }
 

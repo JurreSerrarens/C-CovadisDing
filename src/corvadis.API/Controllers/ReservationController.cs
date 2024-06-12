@@ -19,8 +19,8 @@ namespace Covadis.API.Controllers
             var value =  context.Reservations;
             return Ok(value);
         }
-        [HttpGet]
-        public IActionResult GetBy(int id)
+        [HttpGet("getReservation/{id}")]
+        public IActionResult GetById(int id)
         {
             var value = context.Reservations.FirstOrDefault(x => x.Id == id);
             return Ok(value);
@@ -30,6 +30,7 @@ namespace Covadis.API.Controllers
         public IActionResult Post([FromBody] Reservation res)
         {
             context.Reservations.Add(res);
+            context.SaveChanges();
             return Ok();
         }
 

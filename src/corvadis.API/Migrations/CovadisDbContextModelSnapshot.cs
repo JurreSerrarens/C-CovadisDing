@@ -6,7 +6,7 @@ using Covadis.API.Context;
 
 #nullable disable
 
-namespace corvadis.API.Migrations
+namespace Covadis.API.Migrations
 {
     [DbContext(typeof(CovadisDbContext))]
     partial class CovadisDbContextModelSnapshot : ModelSnapshot

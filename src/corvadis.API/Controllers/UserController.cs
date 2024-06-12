@@ -3,9 +3,12 @@ using Covadis.Shared;
 using Covadis.API.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Covadis.Shared.Constants;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Covadis.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class UserController : ControllerBase
@@ -13,6 +16,7 @@ namespace Covadis.API.Controllers
         private CovadisDbContext context;
         public UserController(CovadisDbContext context) { this.context = context; }
 
+        [Authorize(Roles = Roles.Administrator)]
         [HttpGet]
         public IActionResult Get()
         {
@@ -24,7 +28,9 @@ namespace Covadis.API.Controllers
 
             return Ok(userDtos);
         }
-        [HttpGet]
+
+        [Authorize(Roles = Roles.Administrator)]
+        [HttpGet("getUser/{id}")]
         public IActionResult GetById(int id)
         {
             var userDtos = context.Users.FirstOrDefault(x => x.Id == id);
@@ -32,13 +38,16 @@ namespace Covadis.API.Controllers
             return Ok(userDtos);
         }
 
+        [Authorize(Roles = Roles.Administrator)]
         [HttpPost]
         public IActionResult Post([FromBody] User user)
         {
             context.Users.Add(user);
+            context.SaveChanges();
             return Ok();
         }
 
+        [Authorize(Roles = Roles.Administrator)]
         [HttpPut]
         public IActionResult Update([FromBody] User user)
         {
@@ -51,6 +60,7 @@ namespace Covadis.API.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = Roles.Administrator)]
         [HttpDelete]
         public IActionResult Delete(int Id)
         {
@@ -58,6 +68,13 @@ namespace Covadis.API.Controllers
             context.Users.Where(x => x.Id == Id).ExecuteDelete();
             context.SaveChanges();
             return Ok();
+        }
+
+        [Authorize(Roles = Roles.Administrator)]
+        [HttpGet("secret")]
+        public IActionResult Secret()
+        {
+            return Ok("This is a secret message");
         }
     }
 }
