@@ -5,11 +5,11 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{201EFE69-F059-4516-9459-4ED31FD13754}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "corvadis.API", "src\corvadis.API\corvadis.API.csproj", "{80DFA327-04B3-4E52-810A-3F0573BBA1B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covadis.blazor", "Covadis.blazor\Covadis.blazor.csproj", "{EECCC43E-F42B-4E77-9242-D626BFDE6864}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covadis.API", "src\corvadis.API\Covadis.API.csproj", "{80DFA327-04B3-4E52-810A-3F0573BBA1B3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covadis.Shared", "GraafschapCollege.Shared\Covadis.Shared.csproj", "{DC28DBA8-A298-48AC-87B7-D261545DBC0D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Covadis.blazor", "Covadis.blazor\Covadis.blazor.csproj", "{EECCC43E-F42B-4E77-9242-D626BFDE6864}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +35,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{80DFA327-04B3-4E52-810A-3F0573BBA1B3} = {201EFE69-F059-4516-9459-4ED31FD13754}
+		{DC28DBA8-A298-48AC-87B7-D261545DBC0D} = {201EFE69-F059-4516-9459-4ED31FD13754}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3D631CFB-4949-4494-B3E4-AD26019323CE}
