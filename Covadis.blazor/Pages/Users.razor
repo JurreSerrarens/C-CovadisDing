@@ -1,4 +1,4 @@
-﻿@page "/fetchdata"
+﻿@page "/users"
 @inject HttpClient Http
 @using Covadis.Shared;
 @using System.Text.Json
@@ -28,10 +28,9 @@ else
             @foreach (var user in users)
             {
                 <tr>
-                    <td>@user.Date.ToShortDateString()</td>
-                    <td>@user.TemperatureC</td>
-                    <td>@user.TemperatureF</td>
-                    <td>@user.Summary</td>
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td>@user.Password</td>
                 </tr>
             }
         </tbody>
@@ -39,25 +38,21 @@ else
 }
 
 @code {
-    public class ApiService
+    private UserDto[]? users;
+
+
+    protected override async Task OnInitializedAsync()
     {
-        private readonly HttpClient _httpClient;
-        private UserDto[]? users;
+        users = GetEmployeeAsync().Result;
+    }
 
-
-        public ApiService(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-            users = await GetEmployeeAsync();
-        }
-
-        public async Task<UserDto> GetEmployeeAsync()
-        {
-            string baseUrl = "https://localhost:44333/";
-            var response = await _httpClient.GetAsync($"{baseUrl}/users");
-            response.EnsureSuccessStatusCode();
-            var responseBody = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<UserDto>(responseBody);
-        }
+    public async Task<UserDto[]> GetEmployeeAsync()
+    {
+        string baseUrl = "https://localhost:44333/";
+        var response = await Http.GetAsync($"{baseUrl}/users");
+        response.EnsureSuccessStatusCode();
+        var responseBody = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<UserDto[]>(responseBody);
+    }
     }
 }
