@@ -23,17 +23,32 @@ namespace Covadis.API.Controllers
             {
                 Name = user.Name,
                 Email = user.Email,
+                Password = "Confidential",
             });
+            if (userDtos == null) { return NotFound(); }
 
             return Ok(userDtos);
+            //if (users == null) { return NotFound(); }
+
+            //UserDto[]? userDtos = [];
+            //foreach (var user in users)
+            //{
+            //    UserDto dto = new UserDto
+            //    {
+            //        Email = user.Email,
+            //        Name = user.Name,
+            //        Password = "Confidential"
+            //    };
+            //    userDtos.Append(user);
+            //}
         }
 
         [HttpGet("getUser/{id}")]
         public IActionResult GetById(int id)
         {
-            var userDtos = context.Users.FirstOrDefault(x => x.Id == id);
+            var users = context.Users.FirstOrDefault(x => x.Id == id);
 
-            return Ok(userDtos);
+            return Ok(users);
         }
 
         [HttpPost]

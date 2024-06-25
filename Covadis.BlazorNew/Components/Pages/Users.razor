@@ -44,7 +44,13 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        users = GetEmployeeAsync().Result;
+        //users = GetEmployeeAsync().Result;
+        string baseUrl = "https://localhost:7261/";
+        var response = await Http.GetAsync($"{baseUrl}/User");
+        response.EnsureSuccessStatusCode();
+        var responseBody = await response.Content.ReadAsStringAsync();
+        users = JsonSerializer.Deserialize<UserDto[]>(responseBody);
+
     }
 
     public async Task<UserDto[]> GetEmployeeAsync()
