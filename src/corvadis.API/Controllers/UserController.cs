@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Covadis.API.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
     [ApiController]
     [Route("[controller]")]
     public class UserController : ControllerBase
@@ -16,29 +16,50 @@ namespace Covadis.API.Controllers
         private CovadisDbContext context;
         public UserController(CovadisDbContext context) { this.context = context; }
 
-        [Authorize(Roles = Roles.Administrator)]
         [HttpGet]
         public IActionResult Get()
         {
             var userDtos = context.Users.Select(user => new UserDto
             {
+                Id = user.Id,
                 Name = user.Name,
                 Email = user.Email,
+                Password = "Confidential",
             });
+            if (userDtos == null) { return NotFound(); }
 
             return Ok(userDtos);
+            //if (users == null) { return NotFound(); }
+
+            //UserDto[]? userDtos = [];
+            //foreach (var user in users)
+            //{
+            //    UserDto dto = new UserDto
+            //    {
+            //        Email = user.Email,
+            //        Name = user.Name,
+            //        Password = "Confidential"
+            //    };
+            //    userDtos.Append(user);
+            //}
         }
 
-        [Authorize(Roles = Roles.Administrator)]
         [HttpGet("getUser/{id}")]
         public IActionResult GetById(int id)
         {
-            var userDtos = context.Users.FirstOrDefault(x => x.Id == id);
+            User? user = context.Users.FirstOrDefault(x => x.Id == id);
+            if(user == null) { return NotFound(); }
+            UserDto userDto = new UserDto()
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+                Password = "Confidential",
+            };
 
-            return Ok(userDtos);
+            return Ok(userDto);
         }
 
-        [Authorize(Roles = Roles.Administrator)]
         [HttpPost]
         public IActionResult Post([FromBody] User user)
         {
@@ -47,7 +68,6 @@ namespace Covadis.API.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = Roles.Administrator)]
         [HttpPut]
         public IActionResult Update([FromBody] User user)
         {
@@ -60,7 +80,6 @@ namespace Covadis.API.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = Roles.Administrator)]
         [HttpDelete]
         public IActionResult Delete(int Id)
         {
@@ -70,7 +89,6 @@ namespace Covadis.API.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = Roles.Administrator)]
         [HttpGet("secret")]
         public IActionResult Secret()
         {

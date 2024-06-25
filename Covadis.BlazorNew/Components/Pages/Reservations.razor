@@ -1,0 +1,55 @@
+﻿@page "/reservations"
+@attribute [StreamRendering]
+@inject HttpClient Http
+@using Covadis.Shared.Receive;
+@using System.Text.Json
+
+<PageTitle>Reservations</PageTitle>
+
+<h1>Reservations</h1>
+
+<p>All current reservations</p>
+
+@if (reservations == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Driver</th>
+                <th>Car</th>
+                <th>From</th>
+                <th>To</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reservation in reservations)
+            {
+                <tr>
+                    <td>@reservation.user</td>
+                    <td>@reservation.car</td>
+                    <td>@reservation.from</td>
+                    <td>@reservation.to</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private ReservationDisplayReceive[]? reservations;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = Http.GetStringAsync($"https://localhost:7261/Reservation/ReservationsDisplay");
+        string jsonData = response.Result;
+        Console.WriteLine(jsonData);
+        reservations = JsonSerializer.Deserialize<ReservationDisplayReceive[]>(jsonData);
+
+
+    }
+}
