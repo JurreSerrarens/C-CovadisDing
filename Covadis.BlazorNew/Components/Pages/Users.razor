@@ -19,19 +19,18 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var user in users)
             {
                 <tr>
-                    <td>@user.Name</td>
-                    <td>@user.Email</td>
-                    <td>@user.Password</td>
+                    <td>@user.name</td>
+                    <td>@user.email</td>
+                    <td>@user.password</td>
                 </tr>
             }
         </tbody>
@@ -39,27 +38,26 @@ else
 }
 
 @code {
-    private UserDto[]? users;
+    private UserReceive[]? users;
 
 
     protected override async Task OnInitializedAsync()
     {
-        //users = GetEmployeeAsync().Result;
-        string baseUrl = "https://localhost:7261/";
-        var response = await Http.GetAsync($"{baseUrl}/User");
-        response.EnsureSuccessStatusCode();
-        var responseBody = await response.Content.ReadAsStringAsync();
-        users = JsonSerializer.Deserialize<UserDto[]>(responseBody);
+        var response = Http.GetStringAsync($"https://localhost:7261/User");
+        string jsonData = response.Result;
+        Console.WriteLine(jsonData);
+        users = JsonSerializer.Deserialize<UserReceive[]>(jsonData);
+
 
     }
 
-    public async Task<UserDto[]> GetEmployeeAsync()
+    public async Task<UserReceive[]> GetEmployeeAsync()
     {
         string baseUrl = "https://localhost:7261/";
         //var response = await Http.GetAsync($"{baseUrl}/User");
         var response = await Http.GetAsync("User");
         response.EnsureSuccessStatusCode();
         var responseBody = await response.Content.ReadAsStringAsync();
-        return JsonSerializer.Deserialize<UserDto[]>(responseBody);
+        return JsonSerializer.Deserialize<UserReceive[]>(responseBody);
     }
 }
