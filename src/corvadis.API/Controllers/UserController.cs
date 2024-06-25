@@ -21,6 +21,7 @@ namespace Covadis.API.Controllers
         {
             var userDtos = context.Users.Select(user => new UserDto
             {
+                Id = user.Id,
                 Name = user.Name,
                 Email = user.Email,
                 Password = "Confidential",
@@ -46,9 +47,17 @@ namespace Covadis.API.Controllers
         [HttpGet("getUser/{id}")]
         public IActionResult GetById(int id)
         {
-            var users = context.Users.FirstOrDefault(x => x.Id == id);
+            User? user = context.Users.FirstOrDefault(x => x.Id == id);
+            if(user == null) { return NotFound(); }
+            UserDto userDto = new UserDto()
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+                Password = "Confidential",
+            };
 
-            return Ok(users);
+            return Ok(userDto);
         }
 
         [HttpPost]

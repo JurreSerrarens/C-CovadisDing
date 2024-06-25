@@ -23,6 +23,7 @@ namespace Covadis.API.Controllers
         {
             var carDtos = context.Cars.Select(car => new CarDto
             {
+                Id = car.Id,
                 Name = car.Name,
                 Model = car.Model
             });
