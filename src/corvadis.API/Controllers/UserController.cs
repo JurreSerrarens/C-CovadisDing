@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Covadis.API.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
     [ApiController]
     [Route("[controller]")]
     public class UserController : ControllerBase
@@ -16,7 +16,6 @@ namespace Covadis.API.Controllers
         private CovadisDbContext context;
         public UserController(CovadisDbContext context) { this.context = context; }
 
-        [Authorize(Roles = Roles.Administrator)]
         [HttpGet]
         public IActionResult Get()
         {
@@ -29,7 +28,6 @@ namespace Covadis.API.Controllers
             return Ok(userDtos);
         }
 
-        [Authorize(Roles = Roles.Administrator)]
         [HttpGet("getUser/{id}")]
         public IActionResult GetById(int id)
         {
@@ -38,7 +36,6 @@ namespace Covadis.API.Controllers
             return Ok(userDtos);
         }
 
-        [Authorize(Roles = Roles.Administrator)]
         [HttpPost]
         public IActionResult Post([FromBody] User user)
         {
@@ -47,7 +44,6 @@ namespace Covadis.API.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = Roles.Administrator)]
         [HttpPut]
         public IActionResult Update([FromBody] User user)
         {
@@ -60,7 +56,6 @@ namespace Covadis.API.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = Roles.Administrator)]
         [HttpDelete]
         public IActionResult Delete(int Id)
         {
@@ -70,7 +65,6 @@ namespace Covadis.API.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = Roles.Administrator)]
         [HttpGet("secret")]
         public IActionResult Secret()
         {
